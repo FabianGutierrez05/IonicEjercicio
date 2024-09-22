@@ -1,0 +1,7 @@
+{
+  "name": "IonicTrabajo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
