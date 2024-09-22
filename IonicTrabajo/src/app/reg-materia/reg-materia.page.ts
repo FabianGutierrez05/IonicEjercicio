@@ -75,7 +75,7 @@ export class RegMateriaPage implements OnInit {
       await this.materiaService.agregarMateria(this.materia);
       console.log('Materia registrada:', this.materia);
       await this.cargarMaterias();
-      this.limpiarFormulario();
+      
     }
   }
 
@@ -84,13 +84,5 @@ export class RegMateriaPage implements OnInit {
     await this.cargarMaterias();
   }
 
-  limpiarFormulario() {
-    this.materia = {
-      nombre: '',
-      semestre: 1,
-      codigo: '',
-      horario: '',
-      observaciones: '',
-    };
-  }
+  
 }
