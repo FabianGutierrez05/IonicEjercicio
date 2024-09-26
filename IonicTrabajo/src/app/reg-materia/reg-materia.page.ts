@@ -1,7 +1,8 @@
 // src/app/pages/registro-materia/registro-materia.component.ts
 import { Component, OnInit } from '@angular/core';
-import { Materia } from '../models/materia';
+import { Materia, Nota } from '../models/materia';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { MateriaService } from '../services/materia.service';
 import { FormsModule } from '@angular/forms';
 import  {  IonContent,
@@ -44,7 +45,8 @@ IonTextarea,
   IonList, 
   IonTextarea,
   FormsModule,
-  CommonModule
+  CommonModule,
+  RouterModule
 
   
   ]
@@ -56,8 +58,15 @@ export class RegMateriaPage implements OnInit {
     codigo: '',
     horario: '',
     observaciones: '',
+    notas:[],
   };
-
+  nota: Nota= {
+    fecha: '',
+    descripcion: '',
+    nota: 1,
+    observaciones: '',
+    corte: 1,
+  };
   materias: Materia[] = [];
 
   constructor(private materiaService: MateriaService) {}
@@ -71,16 +80,31 @@ export class RegMateriaPage implements OnInit {
   }
 
   async registrarMateria() {
-    if (this.materia.nombre && this.materia.codigo && this.materia.horario) {
+    
       await this.materiaService.agregarMateria(this.materia);
       console.log('Materia registrada:', this.materia);
       await this.cargarMaterias();
+      window.location.reload();
       
-    }
+    
   }
 
   async eliminarMateria(codigo: string) {
     await this.materiaService.eliminarMateria(codigo);
+    await this.cargarMaterias();
+  }
+  async agregarNota(codigo: string) {
+    await this.materiaService.agregarNota(codigo, this.nota);
+    await this.cargarMaterias();
+  }
+
+  async modificarNota(codigo: string, corte: number) {
+    await this.materiaService.modificarNota(codigo, corte, this.nota.nota);
+    await this.cargarMaterias();
+  }
+
+  async eliminarNota(codigo: string, corte: number) {
+    await this.materiaService.eliminarNota(codigo, corte);
     await this.cargarMaterias();
   }
 

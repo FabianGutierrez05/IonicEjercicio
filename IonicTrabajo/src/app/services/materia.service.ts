@@ -1,6 +1,6 @@
 // src/app/services/materia.service.ts
 import { Injectable } from '@angular/core';
-import { Materia } from '../models/materia';
+import { Materia, Nota } from '../models/materia';
 
 @Injectable({
   providedIn: 'root',
@@ -58,6 +58,46 @@ export class MateriaService {
         const index = this.materias.findIndex((materia) => materia.codigo === codigo);
         if (index > -1) {
           this.materias[index] = nuevaMateria;
+          this.guardarMaterias();
+        }
+        resolve();
+      }, 500);
+    });
+  } async agregarNota(codigo: string, nota: Nota): Promise<void> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const materia = this.materias.find((m) => m.codigo === codigo);
+        if (materia && materia.notas.length < 4) {
+          materia.notas.push(nota);
+          this.guardarMaterias();
+        }
+        resolve();
+      }, 500);
+    });
+  }
+
+  async modificarNota(codigo: string, corte: number, nuevaNota: number): Promise<void> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const materia = this.materias.find((m) => m.codigo === codigo);
+        if (materia) {
+          const nota = materia.notas.find((n) => n.corte === corte);
+          if (nota) {
+            nota.nota = nuevaNota;
+            this.guardarMaterias();
+          }
+        }
+        resolve();
+      }, 500);
+    });
+  }
+
+  async eliminarNota(codigo: string, corte: number): Promise<void> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const materia = this.materias.find((m) => m.codigo === codigo);
+        if (materia) {
+          materia.notas = materia.notas.filter((n) => n.corte !== corte);
           this.guardarMaterias();
         }
         resolve();

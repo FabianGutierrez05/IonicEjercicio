@@ -33,26 +33,28 @@
       <ion-input [(ngModel)]="materia.observaciones" name="observaciones"></ion-input>
     </ion-item>
 
-    <ion-button  (click)="registrarMateria()" expand="block" type="submit">Registrar Materia</ion-button>
+    <ion-button  expand="block" type="submit" >Registrar Materia</ion-button>
   </form>
 
 
   <!-- Lista de materias registradas -->
   <ion-list *ngIf="materias.length > 0">
-    <ion-item *ngFor="let mat of materias">
+    <ion-item *ngFor="let materia of materias">
       <ion-label>
-        <h2>{{ mat.nombre }} ({{ mat.codigo }})</h2>
-        <p>Semestre: {{ mat.semestre }} - Horario: {{ mat.horario }}</p>
-        <p *ngIf="mat.observaciones">Observaciones: {{ mat.observaciones }}</p>
+        <h2>{{ materia.nombre }} ({{ materia.codigo }})</h2>
+        <p>Semestre: {{ materia.semestre }} - Horario: {{ materia.horario }}</p>
+        <p *ngIf="materia.observaciones">Observaciones: {{ materia.observaciones }}</p>
       </ion-label>
-      <ion-button color="danger" slot="end" (click)="eliminarMateria(mat.codigo)">
+      <ion-button color="danger" slot="end" (click)="eliminarMateria(materia.codigo)">
         Eliminar
       </ion-button>
-      <ion-button color="danger" slot="end" (click)="eliminarMateria(mat.codigo)">
+      <ion-button color="danger" slot="end" (click)="eliminarMateria(materia.codigo)">
         Modificar
       </ion-button>
+      <ion-button routerLink="/reg-notas/{{materia.codigo}}">Agregar/Modificar Notas</ion-button>
     </ion-item>
   </ion-list>
 
-  <p *ngIf="materias.length === 0" class="ion-text-center">No hay materias registradas.</p>
 </ion-content>
+
+

@@ -1,0 +1,59 @@
+<!-- src/app/pages/nota/nota.page.html -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Notas de {{ materia?.nombre }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="materia">
+    <h2>{{ materia.nombre }}</h2>
+    <p>Código: {{ materia.codigo }}</p>
+
+    <!-- Mostrar notas existentes -->
+    <ion-list *ngFor="let nota of materia.notas">
+      <ion-item>
+        <ion-label>
+          <h3>Corte {{ nota.corte }}</h3>
+          <p>Nota: {{ nota.nota }}</p>
+          <p>Fecha: {{ nota.fecha }}</p>
+          <p>Descripción: {{ nota.descripcion }}</p>
+          <p>Observaciones: {{ nota.observaciones }}</p>
+        </ion-label>
+        <!--<ion-button (click)="modificarNota(nota.corte)">Modificar</ion-button>-->
+        <ion-button color="danger" (click)="eliminarNota(nota.corte)">Eliminar</ion-button>
+      </ion-item>
+    </ion-list>
+
+    <!-- Formulario para agregar/modificar nota -->
+    <form (ngSubmit)="agregarNota()">
+      <ion-item>
+        <ion-label position="floating">Corte</ion-label>
+        <ion-input [(ngModel)]="nota.corte" name="corte" required></ion-input>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label position="floating">Nota</ion-label>
+        <ion-input [(ngModel)]="nota.nota" name="valor" required></ion-input>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label position="floating">Fecha</ion-label>
+        <ion-input [(ngModel)]="nota.fecha" name="fecha" required type="date"></ion-input>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label position="floating">Descripción</ion-label>
+        <ion-textarea [(ngModel)]="nota.descripcion" name="descripcion"></ion-textarea>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label position="floating">Observaciones</ion-label>
+        <ion-textarea [(ngModel)]="nota.observaciones" name="observaciones"></ion-textarea>
+      </ion-item>
+    
+      <ion-button expand="block" type="submit">Guardar Nota</ion-button>
+    </form>
+    
+  </div>
+</ion-content>
