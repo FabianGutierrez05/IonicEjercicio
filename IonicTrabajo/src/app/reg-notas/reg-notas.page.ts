@@ -4,7 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { Materia, Nota } from '../models/materia';
 import { MateriaService } from '../services/materia.service';
 import { ActivatedRoute } from '@angular/router';
-import { IonContent, IonHeader, IonTitle, IonToolbar,IonList, IonItem, IonLabel, IonButton } from '@ionic/angular/standalone';
+
+import { IonContent, IonHeader, IonTitle, IonToolbar,IonList, IonItem, IonLabel, IonButton, IonInput } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-reg-notas',
@@ -20,7 +21,8 @@ import { IonContent, IonHeader, IonTitle, IonToolbar,IonList, IonItem, IonLabel,
     IonList,
     IonItem,
     IonLabel,
-    IonButton,]
+    IonButton,
+    IonInput]
 })
 export class RegNotasPage implements OnInit {
   codigo: string;
@@ -52,7 +54,7 @@ export class RegNotasPage implements OnInit {
     if (this.materia) {
       await this.materiaService.agregarNota(this.codigo, this.nota);
       await this.cargarMateria();
-
+      window.location.reload();
     }
   }
 
