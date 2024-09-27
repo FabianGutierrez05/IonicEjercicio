@@ -1,10 +1,10 @@
 // src/app/pages/registro-materia/registro-materia.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Materia, Nota } from '../models/materia';
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MateriaService } from '../services/materia.service';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import  {  IonContent,
   IonHeader,
   IonTitle,

@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ materia?.nombre }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="materia">
+  <h2>{{ materia.nombre }}</h2>
+  <h3>Semestre: {{ materia.semestre }}</h3>
+  <p>Código: {{ materia.codigo }}</p>
+  <p>Horario: {{ materia.horario }}</p>
+  <p>Observaciones: {{ materia.observaciones }}</p>
+  
+  <ion-button expand="block" routerLink="/reg-notas/{{materia.codigo}}">Agregar Notas</ion-button>
+</ion-content>

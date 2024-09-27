@@ -54,7 +54,7 @@ export class RegNotasPage implements OnInit {
     if (this.materia) {
       await this.materiaService.agregarNota(this.codigo, this.nota);
       await this.cargarMateria();
-      window.location.reload();
+    
     }
   }
 
