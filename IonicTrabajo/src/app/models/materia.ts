@@ -12,5 +12,5 @@ export interface Nota{
     descripcion: string;
     nota: number;
     observaciones: string;
-    corte: number;
+    corte: string;
 }

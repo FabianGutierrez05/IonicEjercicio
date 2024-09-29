@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Materia, Nota } from '../models/materia';
 import { RouterModule } from '@angular/router';
 import { MateriaService } from '../services/materia.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import  {  IonContent,
   IonHeader,
@@ -46,15 +46,26 @@ IonTextarea,
   IonTextarea,
   FormsModule,
   CommonModule,
-  RouterModule
+  RouterModule,
+  ReactiveFormsModule
 
   
   ]
 })
 export class RegMateriaPage implements OnInit {
+  materiaForm: FormGroup= new FormGroup({
+    nombre: new FormControl('', [Validators.required]),
+    semestre: new FormControl('', [Validators.required]),
+    codigo: new FormControl('', [Validators.required]),
+    horario: new FormControl('', [Validators.required]),
+    observaciones: new FormControl('', [Validators.required]),
+
+  })
+
+
   materia: Materia = {
     nombre: '',
-    semestre: 1,
+    semestre: 0,
     codigo: '',
     horario: '',
     observaciones: '',
@@ -65,7 +76,7 @@ export class RegMateriaPage implements OnInit {
     descripcion: '',
     nota: 1,
     observaciones: '',
-    corte: 1,
+    corte: '',
   };
   materias: Materia[] = [];
 
@@ -98,12 +109,12 @@ export class RegMateriaPage implements OnInit {
     await this.cargarMaterias();
   }
 
-  async modificarNota(codigo: string, corte: number) {
+  async modificarNota(codigo: string, corte: string) {
     await this.materiaService.modificarNota(codigo, corte, this.nota.nota);
     await this.cargarMaterias();
   }
 
-  async eliminarNota(codigo: string, corte: number) {
+  async eliminarNota(codigo: string, corte: string) {
     await this.materiaService.eliminarNota(codigo, corte);
     await this.cargarMaterias();
   }

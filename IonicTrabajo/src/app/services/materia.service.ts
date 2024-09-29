@@ -67,16 +67,19 @@ export class MateriaService {
     return new Promise((resolve) => {
       setTimeout(() => {
         const materia = this.materias.find((m) => m.codigo === codigo);
-        if (materia && materia.notas.length < 4) {
-          materia.notas.push(nota);
-          this.guardarMaterias();
+        if (materia) {
+          const notaExistente = materia.notas.find((n) => n.corte === nota.corte);
+          if (!notaExistente && materia.notas.length < 4) {
+            materia.notas.push(nota);
+            this.guardarMaterias();
+          }
         }
         resolve();
       }, 500);
     });
   }
 
-  async modificarNota(codigo: string, corte: number, nuevaNota: number): Promise<void> {
+  async modificarNota(codigo: string, corte: string, nuevaNota: number): Promise<void> {
     return new Promise((resolve) => {
       setTimeout(() => {
         const materia = this.materias.find((m) => m.codigo === codigo);
@@ -92,7 +95,7 @@ export class MateriaService {
     });
   }
 
-  async eliminarNota(codigo: string, corte: number): Promise<void> {
+  async eliminarNota(codigo: string, corte: string): Promise<void> {
     return new Promise((resolve) => {
       setTimeout(() => {
         const materia = this.materias.find((m) => m.codigo === codigo);

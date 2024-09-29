@@ -14,7 +14,7 @@
     <ion-list *ngFor="let nota of materia.notas">
       <ion-item>
         <ion-label>
-          <h3>Corte {{ nota.corte }}</h3>
+          <h3>Corte: {{ nota.corte }}</h3>
           <p>Nota: {{ nota.nota }}</p>
           <p>Fecha: {{ nota.fecha }}</p>
           <p>Descripción: {{ nota.descripcion }}</p>
@@ -26,33 +26,43 @@
     </ion-list>
 
     <!-- Formulario para agregar/modificar nota -->
-    <form (ngSubmit)="agregarNota()">
+    <form [formGroup]="notasForm" (ngSubmit)="agregarNota()">
       <ion-item>
         <ion-label position="floating">Corte</ion-label>
-        <ion-input [(ngModel)]="nota.corte" name="corte" required></ion-input>
+        <ion-select [(ngModel)]="nota.corte" name="corte" formControlName="corte">
+          <ion-select-option value="Corte 1">Corte 1</ion-select-option>
+          <ion-select-option value="Corte 2">Corte 2</ion-select-option>
+          <ion-select-option value="Corte 3">Corte 3</ion-select-option>
+          <ion-select-option value="Corte 4">Corte 4</ion-select-option>
+        </ion-select>
+        <p style="color: red;text-align: right" *ngIf="notasForm.get('corte')?.getError('required')">Campo obligatorio</p>
       </ion-item>
-    
+      
+
       <ion-item>
         <ion-label position="floating">Nota</ion-label>
-        <ion-input [(ngModel)]="nota.nota" name="valor" required></ion-input>
+        <ion-input [(ngModel)]="nota.nota" name="valor" type="number" required formControlName="nota"></ion-input>
       </ion-item>
+      <p style="color: red;text-align: right"   *ngIf="notasForm.get('nota')?.getError('required')">Campo obligatorio</p>
     
       <ion-item>
         <ion-label position="floating">Fecha</ion-label>
-        <ion-input [(ngModel)]="nota.fecha" name="fecha" required type="date"></ion-input>
+        <ion-input [(ngModel)]="nota.fecha" name="fecha" required type="date" formControlName="fecha"></ion-input>
       </ion-item>
+      <p style="color: red;text-align: right"   *ngIf="notasForm.get('fecha')?.getError('required')">Campo obligatorio</p>
     
       <ion-item>
         <ion-label position="floating">Descripción</ion-label>
-        <ion-input [(ngModel)]="nota.descripcion" name="descripcion"></ion-input>
+        <ion-input [(ngModel)]="nota.descripcion" name="descripcion" formControlName="descripcion"></ion-input>
       </ion-item>
-    
+      <p style="color: red;text-align: right"   *ngIf="notasForm.get('descripcion')?.getError('required')">Campo obligatorio</p>
       <ion-item>
         <ion-label position="floating">Observaciones</ion-label>
-        <ion-input [(ngModel)]="nota.observaciones" name="observaciones"></ion-input>
+        <ion-input [(ngModel)]="nota.observaciones" name="observaciones" formControlName="observaciones"></ion-input>
       </ion-item>
-    
-      <ion-button expand="block" type="submit" >Guardar Nota</ion-button>
+      <p style="color: red;text-align: right" *ngIf="notasForm.get('observaciones')?.getError('required')">Campo obligatorio</p>
+
+      <ion-button [disabled]="notasForm.invalid" expand="block" type="submit" >Guardar Nota</ion-button>
     </form>
     
   </div>

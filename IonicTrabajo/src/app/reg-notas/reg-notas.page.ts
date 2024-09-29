@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Materia, Nota } from '../models/materia';
 import { MateriaService } from '../services/materia.service';
 import { ActivatedRoute } from '@angular/router';
 
-import { IonContent, IonHeader, IonTitle, IonToolbar,IonList, IonItem, IonLabel, IonButton, IonInput } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar,IonList, IonItem, IonLabel, IonButton, IonInput, IonSelect,IonSelectOption } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-reg-notas',
@@ -22,9 +22,20 @@ import { IonContent, IonHeader, IonTitle, IonToolbar,IonList, IonItem, IonLabel,
     IonItem,
     IonLabel,
     IonButton,
-    IonInput]
+    ReactiveFormsModule,
+    IonInput,
+  IonSelect, IonSelectOption]
 })
 export class RegNotasPage implements OnInit {
+  notasForm: FormGroup= new FormGroup({
+    corte: new FormControl('', [Validators.required]),
+    nota: new FormControl('', [Validators.required]),
+    fecha: new FormControl('', [Validators.required]),
+    descripcion: new FormControl('', [Validators.required]),
+    observaciones: new FormControl('', [Validators.required]), 
+  })
+
+
   codigo: string;
   materia: Materia | undefined;
   nota: Nota = {
@@ -32,7 +43,7 @@ export class RegNotasPage implements OnInit {
     descripcion: '',
     nota: 0,
     observaciones: '',
-    corte: 1
+    corte: 'Corte 1',
   };
   constructor( 
     private route: ActivatedRoute,
@@ -65,7 +76,7 @@ export class RegNotasPage implements OnInit {
     //}
   //}
 
-  async eliminarNota(corte: number) {
+  async eliminarNota(corte: string) {
     if (this.materia) {
       await this.materiaService.eliminarNota(this.codigo, corte);
       await this.cargarMateria();
