@@ -63,7 +63,10 @@ export class MateriaService {
         resolve();
       }, 500);
     });
-  } async agregarNota(codigo: string, nota: Nota): Promise<void> {
+    
+  }
+  
+  async agregarNota(codigo: string, nota: Nota): Promise<void> {
     return new Promise((resolve) => {
       setTimeout(() => {
         const materia = this.materias.find((m) => m.codigo === codigo);
@@ -104,6 +107,20 @@ export class MateriaService {
           this.guardarMaterias();
         }
         resolve();
+      }, 500);
+    });
+  }
+  async calcularPromedio(codigo: string): Promise<number | null> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const materia = this.materias.find((m) => m.codigo === codigo);
+        if (materia && materia.notas.length > 0) {
+          const sumatoriaNotas = materia.notas.reduce((sum, nota) => sum + nota.nota, 0);
+          const promedio = sumatoriaNotas / materia.notas.length;
+          resolve(promedio);
+        } else {
+          resolve(null); // No hay notas, no se puede calcular el promedio
+        }
       }, 500);
     });
   }

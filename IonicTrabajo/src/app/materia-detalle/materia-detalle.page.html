@@ -10,6 +10,6 @@
   <p>Código: {{ materia.codigo }}</p>
   <p>Horario: {{ materia.horario }}</p>
   <p>Observaciones: {{ materia.observaciones }}</p>
-  
+  <p>Promedio: {{ materia.promedio | number:'1.2-2' }}</p>
   <ion-button expand="block" routerLink="/reg-notas/{{materia.codigo}}">Agregar Notas</ion-button>
 </ion-content>

@@ -5,6 +5,7 @@ export interface Materia{
     horario: string;
     observaciones: string;
     notas: Nota[];
+    promedio?: number;
 }
 
 export interface Nota{
