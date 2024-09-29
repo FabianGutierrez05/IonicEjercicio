@@ -37,6 +37,11 @@ export class MateriaDetallePage implements OnInit {
   codigo: string = '';
   materia: Materia | undefined;
 
+  promPrimerCorte: number | null=null;
+  promSegundoCorte: number | null=null;
+  promTercerCorte: number | null=null;
+  promCuartoCorte: number | null=null;
+  
   constructor(private route: ActivatedRoute, private materiaService: MateriaService) {
     this.codigo = this.route.snapshot.paramMap.get('codigo') || '';
   }
@@ -49,6 +54,10 @@ export class MateriaDetallePage implements OnInit {
     if (this.materia) {
       const promedio = await this.materiaService.calcularPromedio(this.codigo);
       this.materia.promedio = promedio !== null ? promedio : 0;
+      this.promPrimerCorte = await this.materiaService.calcularPromedioPorCorte(this.codigo, 'Corte 1');
+      this.promSegundoCorte = await this.materiaService.calcularPromedioPorCorte(this.codigo, 'Corte 2');
+      this.promTercerCorte = await this.materiaService.calcularPromedioPorCorte(this.codigo, 'Corte 3');
+      this.promCuartoCorte = await this.materiaService.calcularPromedioPorCorte(this.codigo, 'Corte 4');
     }
   }
 }

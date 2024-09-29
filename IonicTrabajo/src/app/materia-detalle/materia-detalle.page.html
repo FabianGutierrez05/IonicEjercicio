@@ -11,5 +11,9 @@
   <p>Horario: {{ materia.horario }}</p>
   <p>Observaciones: {{ materia.observaciones }}</p>
   <p>Promedio: {{ materia.promedio | number:'1.2-2' }}</p>
+  <p><strong>Promedio Primer Corte:</strong> {{ promPrimerCorte !== null ? promPrimerCorte : 'Sin notas' }}</p>
+  <p><strong>Promedio Segundo Corte:</strong> {{ promSegundoCorte !== null ? promSegundoCorte : 'Sin notas' }}</p>
+  <p><strong>Promedio Tercer Corte:</strong> {{ promTercerCorte !== null ? promTercerCorte : 'Sin notas' }}</p>
+  <p><strong>Promedio Cuarto Corte:</strong> {{ promCuartoCorte !== null ? promCuartoCorte : 'Sin notas' }}</p>
   <ion-button expand="block" routerLink="/reg-notas/{{materia.codigo}}">Agregar Notas</ion-button>
 </ion-content>

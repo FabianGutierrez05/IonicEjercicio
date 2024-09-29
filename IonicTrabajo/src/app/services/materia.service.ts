@@ -124,4 +124,25 @@ export class MateriaService {
       }, 500);
     });
   }
+  async calcularPromedioPorCorte(codigo: string, corte: string): Promise<number | null> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const materia = this.materias.find((m) => m.codigo === codigo);
+        if (materia) {
+          const notasDelCorte = materia.notas.filter(nota => nota.corte === corte);
+          if (notasDelCorte.length > 0) {
+            const sumatoriaNotas = notasDelCorte.reduce((sum, nota) => sum + nota.nota, 0);
+            const promedio = sumatoriaNotas / notasDelCorte.length;
+            resolve(promedio);
+          } else {
+            resolve(null); // No hay notas en este corte
+          }
+        } else {
+          resolve(null); // No se encontró la materia
+        }
+      }, 500);
+    });
+  }
+  
 }
+  
