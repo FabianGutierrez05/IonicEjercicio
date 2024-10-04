@@ -15,13 +15,13 @@
 
     <ion-item>
       <ion-label position="floating">Semestre</ion-label>
-      <ion-input [(ngModel)]="materia.semestre" type="number" formControlName="semestre"></ion-input>
+      <ion-input [(ngModel)]="materia.semestre"  formControlName="semestre"></ion-input>
     </ion-item>
     <p style="color: red;text-align: right"   *ngIf="materiaForm.get('semestre')?.getError('required')">Campo obligatorio</p>
 
     <ion-item>
       <ion-label position="floating">Código</ion-label>
-      <ion-input [(ngModel)]="materia.codigo" formControlName="codigo" type="number"></ion-input>
+      <ion-input [(ngModel)]="materia.codigo" formControlName="codigo" ></ion-input>
     </ion-item>
     <p style="color: red;text-align: right"   *ngIf="materiaForm.get('Código')?.getError('required')">Campo obligatorio</p>
 

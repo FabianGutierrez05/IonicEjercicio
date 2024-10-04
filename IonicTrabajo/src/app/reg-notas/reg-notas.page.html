@@ -41,7 +41,7 @@
 
       <ion-item>
         <ion-label position="floating">Nota</ion-label>
-        <ion-input [(ngModel)]="nota.nota" name="valor" type="number" required formControlName="nota" min="0" max="5" ></ion-input>
+        <ion-input [(ngModel)]="nota.nota" name="valor"  required formControlName="nota" min="0" max="5" ></ion-input>
       </ion-item>
       <p style="color: red;text-align: right"   *ngIf="notasForm.get('nota')?.getError('required')">Campo obligatorio</p>
       <p style="color: red; text-align: right;" *ngIf="notasForm.get('nota')?.getError('min')">El numero debe ser mayor o igual a 0</p>
